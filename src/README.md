@@ -2,6 +2,8 @@
 
 A super simple FastAPI application that allows students to view and sign up for extracurricular activities.
 
+Data is persisted in a local SQLite database (`activities.db`) so activity and signup changes remain after server restarts.
+
 ## Features
 
 - View all available extracurricular activities
@@ -15,13 +17,19 @@ A super simple FastAPI application that allows students to view and sign up for 
    pip install fastapi uvicorn
    ```
 
-2. Run the application:
+2. (Optional) Remove the local database to start fresh with seed data:
+
+   ```
+   rm -f activities.db
+   ```
+
+3. Run the application:
 
    ```
    python app.py
    ```
 
-3. Open your browser and go to:
+4. Open your browser and go to:
    - API documentation: http://localhost:8000/docs
    - Alternative documentation: http://localhost:8000/redoc
 
@@ -47,4 +55,9 @@ The application uses a simple data model with meaningful identifiers:
    - Name
    - Grade level
 
-All data is stored in memory, which means data will be reset when the server restarts.
+Data is stored in SQLite tables:
+
+- `activities` for activity metadata
+- `signups` for student registrations
+
+On first startup, seed activities and initial participants are inserted automatically.
